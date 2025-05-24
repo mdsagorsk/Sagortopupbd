@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login with Google</title>
+</head>
+<body style="font-family: sans-serif; text-align: center; padding-top: 100px;">
+  <h2>Login</h2>
+  <button onclick="googleLogin()" style="padding: 10px 20px; font-size: 16px;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="Google" width="20" style="vertical-align: middle; margin-right: 8px;">
+    Login with Google
+  </button>
+
+  <script type="module">
+    // Import Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    // Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyDTjboLACeIP0sZt0rj18SEZuWXsVQ1L5k",
+      authDomain: "sagortopupbd.firebaseapp.com",
+      projectId: "sagortopupbd",
+      storageBucket: "sagortopupbd.appspot.com",
+      messagingSenderId: "458480335127",
+      appId: "1:458480335127:web:16068449820b6ea97c8448",
+      measurementId: "G-RBFY9TPF67"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // Login Function
+    window.googleLogin = () => {
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          const user = result.user;
+          alert("Logged in as: " + user.email);
+        })
+        .catch((error) => {
+          alert("Login failed: " + error.message);
+        });
+    };
+  </script>
+</body>
+</html>
