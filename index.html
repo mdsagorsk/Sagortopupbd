@@ -1,89 +1,40 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sagor Topup BD</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; }
-    header, footer { background-color: #111; color: white; padding: 20px; text-align: center; }
-    nav { background-color: #444; padding: 10px; text-align: center; }
-    nav a { color: white; margin: 10px; text-decoration: none; }
-    section { padding: 20px; }
-    .section-title { color: #444; font-size: 24px; margin-bottom: 10px; }
-    .box { background: white; border-radius: 8px; padding: 15px; margin-bottom: 20px; box-shadow: 0 0 8px #ccc; }
-    .image { max-width: 100%; height: auto; display: block; margin: 0 auto 10px; }
-    .login-box { max-width: 300px; margin: 0 auto; background: #eee; padding: 20px; border-radius: 8px; }
-    .login-box input { display: block; width: 100%; margin: 10px 0; padding: 10px; }
-    .login-box button { background: #111; color: white; padding: 10px; width: 100%; border: none; }
-  </style>
+  <meta charset="UTF-8">
+  <title>Sagortopupbd Login</title>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
 </head>
 <body>
-  <header>
-    <h1>SagorTopupBD</h1>
-  </header>
+  <h2>Login</h2>
+  <button onclick="googleLogin()">Login with Google</button>
 
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#membership">Free Fire</a>
-    <a href="#payment">Payment</a>
-    <a href="#social">Social Media</a>
-    <a href="#more">More Games</a>
-    <a href="#login">Login</a>
-  </nav>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDTjboLACelP0sZt0rj18SEZuWXsVQ1L5k",
+      authDomain: "sagortopupbd.firebaseapp.com",
+      projectId: "sagortopupbd",
+      appId: "1:458480335127:web:exampleappid123456"
+    };
 
-  <section id="home">
-    <div class="box">
-      <h2 class="section-title">Banner + Offers</h2>
-      <img class="image" src="images/banner.jpg" alt="Banner">
-      <p>Welcome to SagorTopupBD! Get your Free Fire diamonds, PUBG UC & social media services fast & secure.</p>
-    </div>
-  </section>
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-  <section id="membership">
-    <div class="box">
-      <h2 class="section-title">Free Fire / Membership</h2>
-      <img class="image" src="images/diamond_list.jpg" alt="Diamond List">
-    </div>
-  </section>
-
-  <section id="payment">
-    <div class="box">
-      <h2 class="section-title">bKash / Nagad Payment</h2>
-      <img class="image" src="images/payment_1.jpg" alt="Payment Instructions">
-      <img class="image" src="images/payment_2.png" alt="Payment Option Logos">
-      <p>Send payment to <strong>01904868268</strong> via bKash or Nagad and contact us with a screenshot.</p>
-    </div>
-  </section>
-
-  <section id="social">
-    <div class="box">
-      <h2 class="section-title">Social Media Services</h2>
-      <img class="image" src="images/social_media_services.jpg" alt="Social Services">
-    </div>
-  </section>
-
-  <section id="more">
-    <div class="box">
-      <h2 class="section-title">More Games</h2>
-      <img class="image" src="images/more_games.jpg" alt="More Games">
-    </div>
-  </section>
-
-  <section id="login">
-    <div class="box">
-      <h2 class="section-title">Login / Register</h2>
-      <div class="login-box">
-        <input type="text" placeholder="Username">
-        <input type="password" placeholder="Password">
-        <button>Login</button>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>Contact: 01904868268 | YouTube: sagorvlog-2025 | Facebook: fb.com/share/15W8LxHnCs</p>
-    <p>&copy; 2025 SagorTopupBD. All rights reserved.</p>
-  </footer>
+    function googleLogin() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+        .then((result) => {
+          const user = result.user;
+          alert("Logged in as: " + user.displayName);
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("Login Failed!");
+        });
+    }
+  </script>
 </body>
 </html>
